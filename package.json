@@ -1,6 +1,7 @@
 {
   "name": "api-ericanews",
   "version": "1.0.0",
+  "type": "module",
   "description": "API for Erica News",
   "main": "index.js",
   "scripts": {
