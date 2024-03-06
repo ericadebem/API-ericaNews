@@ -1,9 +1,25 @@
-const express = require("express");
-const app = express();
-const userRoute = require("./src/routes/user.route");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import { userRoute } from "./src/routes/user.route";
 
-const port = 3000;
+dotenv.config();
+const app = express();
+const DB_KEY = process.env.DB_KEY;
+const PORT = 3000;
+const mongooseOptions = {
+  useNewParser: true,
+  unifiedTopology: true,
+};
+app.use(cors());
+app.use(express.json());
 
 app.use("/user", userRoute);
 
-app.listen(port, () => console.log("Server is running on port ${port}"));
+const startServer = async () => {
+  mongoose.connect(DB_KEY);
+  app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+};
+
+startServer();
